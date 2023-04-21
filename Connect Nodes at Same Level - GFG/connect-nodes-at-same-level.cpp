@@ -126,41 +126,43 @@ void inorder(Node *root)
 
 
 // } Driver Code Ends
-/* struct Node
-{
-  int data;
-  Node *left,  *right;
-  Node *nextRight;  // This has garbage value in input trees
-}; */
+/* struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node* nextRight;
+};*/
 
-
-class Solution
-{
+class Solution{
     public:
-    //Function to connect nodes at same level.
     void connect(Node *root)
     {
-       // Your Code Here
-       if(!root)return;
-       queue<Node*>q;
-       q.push(root);
-       while(!q.empty()){
-           int n=q.size();
-           Node*pvs=NULL;
-           for(int i=0;i<n;i++){
-               Node*x=q.front();
-               if(pvs)pvs->nextRight=x;
-               pvs=x;
-               q.pop();
-               if(x->left)
-               q.push(x->left);
-               if(x->right)
-               q.push(x->right);
-           }
-       }
+       // Code Here
+       if(root==NULL)
+        return;
+        queue<Node*>q;
+        q.push(root);
+        root->nextRight=NULL;
+        while(!q.empty()){
+            int n=q.size();
+            for(int i=0;i<n;i++){
+                Node*p=q.front();
+                q.pop();
+                if(p->left)
+                q.push(p->left);
+                if(p->right)
+                q.push(p->right);
+                if(i==n-1){
+                    p->nextRight=NULL;
+                }
+                else{
+                    p->nextRight=q.front();
+                }
+            }
+        }
     }    
-      
 };
+
 
 
 

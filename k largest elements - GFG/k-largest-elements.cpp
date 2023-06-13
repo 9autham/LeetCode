@@ -14,12 +14,12 @@ public:
 	    for(int i=0;i<n;i++){
 	        q.push(arr[i]);
 	    }
-	    vector<int>ans;
-	    while(k--){
-	        ans.push_back(q.top());
+	    vector<int>v;
+	    for(int i=0;i<k;i++){
+	        v.push_back(q.top());
 	        q.pop();
 	    }
-	    return ans;
+	    return v;
 	}
 
 };

@@ -19,7 +19,15 @@ class Solution
     int countWays(int n)
     {
         vector<int>dp(n+1,-1);
-        return f(n,dp);
+        dp[0]=1;
+        for(int i=1;i<=n;i++){
+            int pick=f(i-1,dp)%mod;
+            int notpick=0;
+            if(i-2>=0)
+            notpick=f(i-2,dp)%mod;
+            dp[i]=(pick+notpick)%mod;
+        }
+        return dp[n];
     }
 };
 

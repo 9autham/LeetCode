@@ -19,7 +19,16 @@ class Solution {
     int minimumEnergy(vector<int>& height, int n) {
         // Code here
         vector<int>dp(n+1,-1);
-        return f(height,n-1,dp);
+        dp[0]=0;
+        for(int i=1;i<n;i++){
+            int pick=INT_MAX;
+      int notpick=abs(height[i-1]-height[i])+dp[i-1];
+      if(i-2>=0){
+          pick=abs(height[i-2]-height[i])+dp[i-2];
+      }
+      dp[i]=min(pick,notpick);
+        }
+        return dp[n-1];
     }
 };
 

@@ -9,30 +9,21 @@ using namespace std;
 class Solution
 {
     public:
+    int f(string s1,string s2,int i,int j,vector<vector<int>>&dp){
+        if(i==0 or j==0)
+        return 0;
+        if(dp[i][j]!=-1)return dp[i][j];
+        if(s1[i-1]==s2[j-1]){
+            return dp[i][j]=1+f(s1,s2,i-1,j-1,dp);
+        }
+        return dp[i][j]=max(f(s1,s2,i-1,j,dp),f(s1,s2,i,j-1,dp));
     //Function to find the length of longest common subsequence in two strings.
-    int f(string t1, string t2,int idx1,int idx2,vector<vector<int>>&dp){
-        if(idx1==0 or idx2==0)return 0;
-        if(dp[idx1][idx2]!=-1)return dp[idx1][idx2];
-        if(t1[idx1-1]==t2[idx2-1]){
-            return 1+f(t1,t2,idx1-1,idx2-1,dp);
-        }
-        return dp[idx1][idx2]=max(f(t1,t2,idx1-1,idx2,dp),f(t1,t2,idx1,idx2-1,dp));
     }
-    int lcs(int x, int y, string t1, string t2)
+    int lcs(int x, int y, string s1, string s2)
     {
-        int n=t1.size();
-        int m=t2.size();
-        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
-        for(int idx1=1;idx1<=n;idx1++){
-            for(int idx2=1;idx2<=m;idx2++){
-                if(t1[idx1-1]==t2[idx2-1]){
-                    dp[idx1][idx2]=1+dp[idx1-1][idx2-1];
-                }
-                else
-                dp[idx1][idx2]=max(dp[idx1-1][idx2],dp[idx1][idx2-1]);
-            }
-        }
-        return dp[n][m];
+        vector<vector<int>>dp(x+1,vector<int>(y+1,-1));
+        // your code here
+        return f(s1,s2,x,y,dp);
     }
 };
 

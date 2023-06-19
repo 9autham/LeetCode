@@ -21,9 +21,18 @@ class Solution
     }
     int lcs(int x, int y, string s1, string s2)
     {
-        vector<vector<int>>dp(x+1,vector<int>(y+1,-1));
-        // your code here
-        return f(s1,s2,x,y,dp);
+        vector<vector<int>>dp(x+2,vector<int>(y+2,0));
+        for(int i=1;i<=x;i++){
+            for(int j=1;j<=y;j++){
+                if(s1[i-1]==s2[j-1]){
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+                else{
+                    dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        return dp[x][y];
     }
 };
 

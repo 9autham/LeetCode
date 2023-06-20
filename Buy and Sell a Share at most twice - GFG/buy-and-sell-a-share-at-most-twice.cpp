@@ -25,9 +25,24 @@ int f(vector<int>&price,int idx,int buy,int k,vector<vector<vector<int>>>&dp){
 int maxProfit(vector<int>&price){
     //Write your code here..
     int n=price.size();
-    vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(3,-1)));
-    for
-    return f(price,0,1,2,dp);
+    vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(3,0)));
+    for(int i=n-1;i>=0;i--){
+        for(int j=0;j<=1;j++){
+            for(int k=1;k<=2;k++){
+                if(j){
+                    int b=-price[i]+dp[i+1][0][k];
+                    int nb=dp[i+1][j][k];
+                    dp[i][j][k]=max(b,nb);
+                }
+                else{
+                    int s=price[i]+dp[i+1][1][k-1];
+                    int ns=dp[i+1][j][k];
+                    dp[i][j][k]=max(s,ns);
+                }
+            }
+        }
+    }
+    return dp[0][1][2];
 }
 
 //{ Driver Code Starts.

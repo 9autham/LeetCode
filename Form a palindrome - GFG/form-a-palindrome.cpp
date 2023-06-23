@@ -1,47 +1,48 @@
 //{ Driver Code Starts
 //Initial template for C++
 
-#include <bits/stdc++.h>
-using namespace std;
+#include<bits/stdc++.h> 
+using namespace std; 
 
 // } Driver Code Ends
 //User function template for C++
 
-class Solution{
-  public:
-    int countMin(string str){
-    //complete the function here
-    int n=str.size();
-    string s=str;
-    reverse(str.begin(),str.end());
-    vector<vector<int>>dp(n+1,vector<int>(n+1,0));
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            if(str[i-1]==s[j-1]){
-                dp[i][j]=1+dp[i-1][j-1];
-            }
-            else{
-                dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+class Solution{   
+public:
+    int findMinInsertions(string s){
+        int n=s.size();
+        string t=s;
+        reverse(t.begin(),t.end());
+        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                if(s[i-1]==t[j-1]){
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+                else{
+                    dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                }
             }
         }
-    }
-    int ans=dp[n][n];
-    return n-ans;
+        int len=dp[n][n];
+        return n-len;
     }
 };
 
 //{ Driver Code Starts.
+
+
+
 int main(){
     int t;
-    cin >> t;
+    cin>>t;
     while(t--){
-        string str;
-        cin >> str;
+        string S;
+        cin>>S;
         Solution ob;
-        cout << ob.countMin(str) << endl;
+        cout<<ob.findMinInsertions(S)<<endl;
     }
-return 0;
+    return 0;
 }
-
 
 // } Driver Code Ends

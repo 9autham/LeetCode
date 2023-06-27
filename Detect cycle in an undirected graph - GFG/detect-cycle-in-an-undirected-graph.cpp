@@ -8,10 +8,10 @@ class Solution {
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
+        queue<pair<int,int>>q;
         vector<int>vis(V,0);
         for(int i=0;i<V;i++){
             if(!vis[i]){
-        
                 q.push({i,-1});
                 vis[i]=1;
                 while(!q.empty()){

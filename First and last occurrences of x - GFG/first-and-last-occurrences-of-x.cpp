@@ -9,15 +9,13 @@ class Solution
     vector<int> find(int arr[], int n , int x )
     {
         // code here
-        vector<int>v(2);
-        auto l=lower_bound(arr,arr+n,x);
-        auto u=upper_bound(arr,arr+n,x);
-        if(l==(arr+n)){
+        auto it=lower_bound(arr,arr+n,x);
+        if((*it)!=x){
             return {-1,-1};
         }
-        if(arr[l-arr]==x)
-        return {l-arr,u-arr-1};
-        return {-1,-1};
+        auto it1=upper_bound(arr,arr+n,x);
+        it1--;
+        return {it-arr,it1-arr};
     }
 };
 
